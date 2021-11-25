@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// ============================ 字体大小 ============================
+@for $i from 12 through 30 {
+    .f#{$i} {
+        font-size: #{$i}px;
+    }
+}
+
+// ============================ 间距 ============================
+$name-list: margin padding;
+$short-name: m p;
+$gap: 5 10 16 20 25 30 35 40 45 50;
+$type: top bottom left right lr tb;
+
+@each $prefix in $short-name {
+    $i: index($short-name, $prefix);
+
+    @each $size in $gap {
+        @each $name in $type {
+            @if $name==lr {
+                .#{$prefix}-#{$name}-#{$size} {
+                    #{nth($name-list, $i)}-left: #{$size}px;
+                    #{nth($name-list, $i)}-right: #{$size}px;
+                }
+            }
+
+            @else if $name==tb {
+                .#{$prefix}-#{$name}-#{$size} {
+                    #{nth($name-list, $i)}-top: #{$size}px;
+                    #{nth($name-list, $i)}-bottom: #{$size}px;
+                }
+            }
+
+            @else {
+                .#{$prefix}-#{$name}-#{$size} {
+                    #{nth($name-list, $i)}-#{$name}: #{$size}px;
+                }
+            }
+        }
+    }
+}
+
+// ============================ 文本换行 ============================
+
+@each $line in 1,
+2,
+3 {
+    .el-#{$line} {
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: $line;
+        -webkit-box-orient: vertical;
+    }
+}
+
+// ============================ 边框 ============================
+$position: top bottom left right lr tb;
+
+@each $var in $position {
+    @if $var==lr {
+        .min-border-#{$var} {
+            border-right: 1px solid #dcdfe6;
+            border-left: 1px solid#dcdfe6;
+        }
+    }
+
+    @else if $var==tb {
+        .min-border-#{$var} {
+            border-top: 1px solid #dcdfe6;
+            border-bottom: 1px solid #dcdfe6;
+        }
+    }
+
+    @else {
+        .min-border-#{$var} {
+            border-#{$var}: 1px solid #dcdfe6;
+        }
+    }
+}
+
+// ============================ flex布局 ============================
+$flex: flex jcenter acenter column jbetween flex1;
+
+@each $var in $flex {
+    @if $var==flex {
+        .#{$var} {
+            display: flex;
+        }
+    }
+
+    @else if $var==jcenter {
+        .j-center {
+            justify-content: center;
+        }
+    }
+
+    @else if $var==jbetween {
+        .j-between {
+            justify-content: space-between;
+        }
+    }
+
+    @else if $var==acenter {
+        .a-center {
+            align-items: center;
+        }
+    }
+
+    @else if $var==column {
+        .column {
+            flex-direction: column;
+        }
+    }
+
+    @else if $var==flex1 {
+        .f-1 {
+            flex: 1;
+        }
+    }
+}
