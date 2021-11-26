@@ -85,7 +85,7 @@ $position: top bottom left right lr tb;
 }
 
 // ============================ flex布局 ============================
-$flex: flex jcenter acenter column jbetween flex1;
+$flex: flex jcenter jbetween jend acenter column flex1;
 
 @each $var in $flex {
     @if $var==flex {
@@ -115,6 +115,12 @@ $flex: flex jcenter acenter column jbetween flex1;
     @else if $var==column {
         .column {
             flex-direction: column;
+        }
+    }
+
+    @else if $var==jend {
+        .j-end {
+            justify-content: flex-end;
         }
     }
 

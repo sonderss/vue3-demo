@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/article',
-        name: '首页',
+        name: 'Main',
         component: () => import('@/views/main/index.vue'),
         meta: {
             title: '首页'

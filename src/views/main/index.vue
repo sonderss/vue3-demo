@@ -4,16 +4,32 @@
       <a-layout-header :style="{ padding: 0 }" class="header">
       </a-layout-header>
       <a-layout-content class="content m-tb-10 m-lr-10">
-        <div class="content_main">
-          <div class="item_all">
-            <Article v-for="item in 5" :key="item" class="item m-tb-10" />
-          </div>
-
-          <div class="pagination">
-            <a-pagination :default-current="6" :total="500" />
-          </div>
+        <div class="content_main" v-if="list.length">
+          <Article
+            :content="item"
+            v-for="item in list"
+            :key="item._id"
+            class="m-tb-10"
+          />
+        </div>
+        <div
+          class="flex j-center a-center"
+          style="height: 100%"
+          v-if="!list.length"
+        >
+          <a-empty description="害，没有更多数据了" />
         </div>
       </a-layout-content>
+      <div class="pagination flex j-center a-center m-bottom-10">
+        <a-pagination
+          v-model="current"
+          :default-current="1"
+          :defaultPageSize="10"
+          :pageSize="10"
+          :total="50"
+          @change="changeCurrent"
+        />
+      </div>
       <a-layout-footer class="footer" style="padding: 0">
         2021 www.sonders.cn
       </a-layout-footer>
@@ -21,25 +37,47 @@
   </a-layout>
 </template>
 <script>
-import { defineComponent, reactive } from "vue";
+import { defineComponent, onMounted, reactive, toRefs } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Article from "@/components/article.vue";
+import { getArticles } from "../../api/api";
 export default defineComponent({
+  name: "Main",
   components: {
     Article,
   },
   setup() {
-    const collapsed = reactive(false);
-    const onCollapse = (collapsed, type) => {
-      console.log(collapsed, type);
-    };
-    const onBreakpoint = (broken) => {
-      console.log(broken);
-    };
-    return {
-      collapsed,
-      onCollapse,
-      onBreakpoint,
-    };
+    const route = useRoute();
+    const dataMap = reactive({
+      current: 1,
+      route: route,
+      list: Array(),
+      changeCurrent(page, pageSize) {
+        console.log(page, pageSize);
+        dataMap.form.page = page;
+        console.log(dataMap.form);
+        dataMap.getArticles();
+      },
+      form: {
+        page: 1,
+        limit: 10,
+        type: null,
+      },
+      async getArticles() {
+        const result = await getArticles(dataMap.form);
+        console.log(result);
+        dataMap.list = result;
+      },
+    });
+    if (route.params.list) {
+      dataMap.list = JSON.parse(route.params.list);
+    }
+    onMounted(() => {
+      if (!route.params.list) {
+        dataMap.getArticles();
+      }
+    });
+    return { ...toRefs(dataMap) };
   },
 });
 </script>
@@ -57,24 +95,15 @@ export default defineComponent({
   .content {
     flex: 1;
     .content_main {
-      width: 100%;
       height: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
-      background: #fff;
+      // background: #fff;
       overflow: auto;
       .pagination {
         height: 40px;
-      }
-      .item_all {
-        height: calc(100% - 40px);
-        .item {
-          width: auto;
-          height: 40px;
-          background: red;
-        }
       }
     }
     .content_main::-webkit-scrollbar {
@@ -93,6 +122,36 @@ export default defineComponent({
     align-items: center;
     flex-wrap: wrap;
     font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 650px) {
+  #components-layout-demo-responsive .content .content_main {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 650px) and (max-width: 1200px) {
+  #components-layout-demo-responsive .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #components-layout-demo-responsive .content .content_main {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1920px) {
+  #components-layout-demo-responsive .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #components-layout-demo-responsive .content .content_main {
+    width: 50%;
   }
 }
 </style>

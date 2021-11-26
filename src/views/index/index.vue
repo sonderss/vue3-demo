@@ -21,35 +21,44 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, onMounted } from "vue";
+import { defineComponent, ref, reactive, onMounted, toRefs } from "vue";
+import { useRouter } from "vue-router";
 import { getArticles } from "../../api/api";
 // reactive 创建引用类型 底层用ES6的proxy 控制属性的操作 不需要.value
 // ref 创建基本类型 底层会去调用reactive  .value
 export default defineComponent({
   setup() {
-    const nums = ref(0);
+    const data = reactive({
+      nums: 0,
+      router: useRouter(),
+      list: Array(),
+      async getArticles() {
+        const result: any = await getArticles({
+          page: 1,
+          limit: 10,
+          type: null,
+        });
+        data.list = result;
+      },
+    });
     function timer(): void {
       const times = setInterval(() => {
-        nums.value += 1;
-        if (nums.value === 100) {
+        data.nums += 1;
+        if (data.nums === 100) {
           clearInterval(times);
+          let a = JSON.stringify(data.list);
+          data.router.push({
+            name: "Main",
+            params: { list: a },
+          });
         }
       }, 30);
     }
     timer();
-    const fetechData = async () => {
-      const list = await getArticles({
-        page: 1,
-        limit: 10,
-        type: null,
-      });
-      console.log(list);
-    };
-
     onMounted(() => {
-      fetechData();
+      data.getArticles();
     });
-    return { nums, fetechData };
+    return { ...toRefs(data) };
   },
 });
 </script>
