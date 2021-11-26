@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/detail/index.vue'),
         meta: {
             title: '文章详情',
-            cache: true
+            cache: false
         }
     }
 ]
