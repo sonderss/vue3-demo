@@ -10,6 +10,7 @@
             v-for="item in list"
             :key="item._id"
             class="m-tb-10"
+            @toDetail="toDetail(item)"
           />
         </div>
         <div
@@ -40,6 +41,7 @@
 import { defineComponent, onMounted, reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Article from "@/components/article.vue";
+
 import { getArticles } from "../../api/api";
 export default defineComponent({
   name: "Main",
@@ -52,6 +54,7 @@ export default defineComponent({
       current: 1,
       route: route,
       list: Array(),
+      router: useRouter(),
       changeCurrent(page, pageSize) {
         console.log(page, pageSize);
         dataMap.form.page = page;
@@ -65,8 +68,15 @@ export default defineComponent({
       },
       async getArticles() {
         const result = await getArticles(dataMap.form);
-        console.log(result);
         dataMap.list = result;
+      },
+      toDetail(e) {
+        dataMap.router.push({
+          name: "Detail",
+          params: {
+            item: JSON.stringify(e),
+          },
+        });
       },
     });
     if (route.params.list) {
@@ -83,75 +93,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#components-layout-demo-responsive {
-  height: 100vh;
-  font-size: 2em;
-  font-family: "shouxieti01";
-  font-style: normal;
-  .header {
-    height: 60px;
-    background: #c4e4ff;
-  }
-  .content {
-    flex: 1;
-    .content_main {
-      height: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      // background: #fff;
-      overflow: auto;
-      .pagination {
-        height: 40px;
-      }
-    }
-    .content_main::-webkit-scrollbar {
-      display: none;
-    }
-  }
-  // #399ee5
-  .footer {
-    height: 60px;
-    text-align: center;
-    line-height: 0;
-    background: #399ee5;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 20px;
-  }
-}
-
-@media screen and (min-width: 300px) and (max-width: 650px) {
-  #components-layout-demo-responsive .content .content_main {
-    width: auto;
-  }
-}
-
-@media screen and (min-width: 650px) and (max-width: 1200px) {
-  #components-layout-demo-responsive .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  #components-layout-demo-responsive .content .content_main {
-    width: 70%;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1920px) {
-  #components-layout-demo-responsive .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  #components-layout-demo-responsive .content .content_main {
-    width: 50%;
-  }
-}
+@import "@/style/page.scss";
 </style>

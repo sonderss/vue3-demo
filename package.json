@@ -7,9 +7,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@types/marked": "^4.0.1",
     "ant-design-vue": "^2.2.8",
     "axios-mapper": "^0.5.9",
     "css-loader": "^6.5.1",
+    "marked": "^4.0.5",
     "node-scss": "^7.0.3",
     "sass": "^1.43.5",
     "sass-loader": "^12.3.0",

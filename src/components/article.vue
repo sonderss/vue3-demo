@@ -37,7 +37,7 @@
           {{ item.value }}
         </a-tag>
       </div>
-      <div class="flex j-end a-center">
+      <div class="flex j-end a-center" @click="() => $emit('toDetail')">
         查看详情
         <RightOutlined :style="{ width: '12px', height: '12px' }" />
         <RightOutlined :style="{ width: '12px', height: '12px' }" />
@@ -68,7 +68,7 @@ export default defineComponent({
       default: () => {},
     },
   },
-  emits: [],
+  emits: ["toDetail"],
   components: {
     CalendarOutlined,
     FolderOpenOutlined,
