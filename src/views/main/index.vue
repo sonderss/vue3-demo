@@ -2,6 +2,13 @@
   <a-layout id="components-layout-demo-responsive">
     <a-layout style="background: #f3fafd">
       <a-layout-header :style="{ padding: 0 }" class="header">
+        <Header />
+        <!-- <div class="header_main flex p-lr-10 j-between a-center">
+          <div>sonders个人博客</div>
+          <div class="aboutMe">
+            <ContactsOutlined />
+          </div>
+        </div> -->
       </a-layout-header>
       <a-layout-content class="content m-tb-10 m-lr-10">
         <div class="content_main" v-if="list.length">
@@ -27,7 +34,7 @@
           :default-current="1"
           :defaultPageSize="10"
           :pageSize="10"
-          :total="50"
+          :total="100"
           @change="changeCurrent"
         />
       </div>
@@ -41,12 +48,13 @@
 import { defineComponent, onMounted, reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Article from "@/components/article.vue";
-
+import Header from "@/components/header.vue";
 import { getArticles } from "../../api/api";
 export default defineComponent({
-  name: "Main",
+  name: "MyBlob",
   components: {
     Article,
+    Header,
   },
   setup() {
     const route = useRoute();
@@ -73,6 +81,7 @@ export default defineComponent({
       toDetail(e) {
         dataMap.router.push({
           name: "Detail",
+          query: { title: e.title },
           params: {
             item: JSON.stringify(e),
           },

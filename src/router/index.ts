@@ -11,8 +11,8 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
-        path: '/article',
-        name: 'Main',
+        path: '/MyBlob',
+        name: 'MyBlob',
         component: () => import('@/views/main/index.vue'),
         meta: {
             title: '首页',
@@ -25,6 +25,15 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/detail/index.vue'),
         meta: {
             title: '文章详情',
+            cache: false
+        }
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: () => import('@/views/about/index.vue'),
+        meta: {
+            title: '我的主页',
             cache: false
         }
     }

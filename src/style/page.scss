@@ -1,3 +1,8 @@
+/**
+ * @description 通用样式
+ * @Auth sonders
+ * @Date 2021-11-27 14:12:11
+ */
 #components-layout-demo-responsive {
     height: 100vh;
     font-size: 2em;
@@ -6,7 +11,22 @@
 
     .header {
         height: 60px;
-        background: #c4e4ff;
+        background: #399ee5;
+        color: #fff;
+
+        .header_main {
+            .aboutMe {
+                font-size: 1em;
+            }
+        }
+
+        .select {
+            user-select: none;
+        }
+
+        .cursor {
+            cursor: pointer;
+        }
     }
 
     .content {
@@ -24,6 +44,25 @@
             .pagination {
                 height: 40px;
             }
+        }
+
+        .content_main_about {
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            // flex-direction: column;
+            // background: #fff;
+            overflow: auto;
+
+        }
+
+        .hoverable_m_avtor {
+            display: none;
+        }
+
+        .desc_txt {
+            padding: 30px;
         }
 
         .content_main::-webkit-scrollbar {
@@ -50,6 +89,42 @@
     #components-layout-demo-responsive .content .content_main {
         width: auto;
     }
+
+    #components-layout-demo-responsive .header {
+        width: auto;
+    }
+
+    #components-layout-demo-responsive .content_main_about {
+        align-items: center !important;
+        flex-direction: column !important;
+
+        .hoverable_pc_avtor {
+            display: none;
+        }
+
+        .hoverable_m_avtor {
+            display: block;
+        }
+
+    }
+
+
+}
+
+
+@media screen and (min-width: 650px) and (max-width: 1210px) {
+    .hoverable_pc_avtor {
+        display: none;
+    }
+
+    #components-layout-demo-responsive .content_main_about {
+        flex-direction: column !important;
+
+        .hoverable_m_avtor {
+            display: block;
+        }
+    }
+
 }
 
 @media screen and (min-width: 650px) and (max-width: 1200px) {
@@ -63,6 +138,23 @@
     #components-layout-demo-responsive .content .content_main {
         width: 70%;
     }
+
+
+    #components-layout-demo-responsive .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    #components-layout-demo-responsive .header_main {
+        width: 70%;
+    }
+
+    #components-layout-demo-responsive .content_main_about {
+        width: 70%;
+        align-items: flex-start;
+    }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1920px) {
@@ -75,5 +167,21 @@
 
     #components-layout-demo-responsive .content .content_main {
         width: 50%;
+    }
+
+    #components-layout-demo-responsive .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #components-layout-demo-responsive .header_main {
+        width: 50%;
+    }
+
+
+    #components-layout-demo-responsive .content_main_about {
+        width: 50%;
+        align-items: flex-start;
     }
 }

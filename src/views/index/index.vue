@@ -48,7 +48,7 @@ export default defineComponent({
           clearInterval(times);
           let a = JSON.stringify(data.list);
           data.router.push({
-            name: "Main",
+            name: "MyBlob",
             params: { list: a },
           });
         }
