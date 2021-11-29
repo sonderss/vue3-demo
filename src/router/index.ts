@@ -36,6 +36,19 @@ const routes: Array<RouteRecordRaw> = [
             title: '我的主页',
             cache: false
         }
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/404/index.vue'),
+        meta: {
+            title: '404',
+            cache: false
+        }
+    },
+    {
+        path: '/:pathMatch(.*)',
+        redirect: '/404'
     }
 ]
 

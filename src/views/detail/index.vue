@@ -80,7 +80,6 @@ export default defineComponent({
   setup() {
     const route: any = useRoute();
     let info_: infoFace = { content: "" };
-    console.log(route.params);
     if (route.params.item) {
       info_ = JSON.parse(route.params.item);
     }
