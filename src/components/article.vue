@@ -111,7 +111,8 @@ export default defineComponent({
         );
       },
       setTags(tags: any) {
-        let tagsArr = JSON.parse(tags);
+        let tagsArr =
+          process.env.NODE_ENV === "development" ? JSON.parse(tags) : tags;
         tagsArr = tagsArr.filter((item: any) => item.value !== "标签");
         return tagsArr;
       },
