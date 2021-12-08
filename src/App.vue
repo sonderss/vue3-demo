@@ -14,5 +14,6 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
+@import "./font/index.scss";
 @import "./style/index.scss";
 </style>
