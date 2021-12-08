@@ -8,7 +8,10 @@
         <div class="content_main_about">
           <a-card hoverable style="width: 280px" class="hoverable_pc_avtor">
             <template #cover>
-              <img alt="暂无头像" src="../../assets/auth.jpg" />
+              <img
+                alt="暂无头像"
+                src="http://sonders.cn/static/media/0.fb5fc520.jpg"
+              />
             </template>
             <a-card-meta title="sonders" description="临渊羡鱼不如退而结网">
               <template #avatar>
@@ -40,13 +43,6 @@
             </div>
           </div>
         </div>
-        <!-- <div
-          class="flex j-center a-center"
-          style="height: 100%"
-          v-if="!list.length"
-        >
-          <a-empty description="害，没有更多数据了" />
-        </div> -->
       </a-layout-content>
       <a-layout-footer class="footer" style="padding: 0">
         2021 www.sonders.cn
@@ -57,7 +53,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Header from "@/components/header.vue";
-// import Person from "@/conponents/person.vue";
 import {
   SettingOutlined,
   EditOutlined,
@@ -68,9 +63,3 @@ export default defineComponent({
   setup() {},
 });
 </script>
-<style lang="scss">
-@import "@/style/page.scss";
-.a {
-  justify-content: flex-start;
-}
-</style>

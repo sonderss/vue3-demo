@@ -66,7 +66,6 @@ export default defineComponent({
 .welcome {
   width: 100%;
   height: 100vh;
-  // background: skyblue;
   font-size: 2em;
   font-family: "shouxieti01";
   .progress {
