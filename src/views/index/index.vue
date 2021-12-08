@@ -63,11 +63,16 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
+@font-face {
+  font-family: "welcome";
+  src: url("http://cdn.static.sonders.cn/welcome.ttf");
+  font-weight: normal;
+}
 .welcome {
   width: 100%;
   height: 100vh;
   font-size: 2em;
-  font-family: "shouxieti01";
+  font-family: "welcome";
   .progress {
     width: 80%;
   }
