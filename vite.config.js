@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import viteCompression from "vite-plugin-compression"
 // import externalGlobals from "rollup-plugin-external-globals";
 import importToCDN, { autoComplete } from 'vite-plugin-cdn-import'
 import path from 'path'
@@ -31,7 +32,8 @@ export default defineConfig({
           path: 'https://cdn.jsdelivr.net/npm/vue-router@4.0.10/dist/vue-router.global.prod.js'
         },
       ]
-    })
+    }),
+    viteCompression()
   ],
   resolve: {
     alias: {
